@@ -94,7 +94,11 @@ func makeTest() {
 	fmt.Printf("len=%d cap=%d value=%v\n", len(c), cap(c), c)
 
 	c = make([]int,0,5)
-	//c = make([]int, 5)
+	for i := 0; i < 5; i++ {
+		c = append(c, i)
+		fmt.Println(c)
+	}
+	c = make([]int, 5)
 	for i := 0; i < 5; i++ {
 		c = append(c, i)
 		fmt.Println(c)
