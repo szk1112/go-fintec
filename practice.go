@@ -26,6 +26,9 @@ func main() {
 	arrayTest()
 	arrayTest2()
 	makeTest()
+	mapTest()
+	byteTest()
+	closureTest()
 }
 
 func strOut() {
@@ -79,6 +82,69 @@ func arrayTest2() {
 	fmt.Println(board)
 }
 
+func incrementGenerator() func() int {
+	x := 0
+	return func() int {
+		x++
+		return x
+	}
+}
+
+func circleArea(pi float64) func(radius float64) float64 {
+	return func(radius float64) float64 {
+		return pi * radius * radius
+	}
+}
+func closureTest() {
+	counter := incrementGenerator()
+	fmt.Println(counter())
+	fmt.Println(counter())
+	fmt.Println(counter())
+	fmt.Println(counter())
+
+	c1 := circleArea(3.14)
+	fmt.Println(c1(2))
+	c2 := circleArea(3)
+	fmt.Println(c2(2))
+}
+
+func byteTest() {
+	b := []byte{72, 73}
+	fmt.Println(b)
+	fmt.Println(string(b))
+	c := []byte("HI")
+	fmt.Println(c)
+	fmt.Println(string(c))
+}
+
+func mapTest() {
+	m := map[string]int{"apple": 100, "banana": 200}
+	fmt.Println(m)
+	fmt.Println(m["apple"])
+	m["banana"] = 300
+	fmt.Println(m)
+	fmt.Println(m["nothing"])
+	v, ok := m["apple"]
+	fmt.Println(v, ok)
+	v2, ok2 := m["nothing"]
+	fmt.Println(v2, ok2)
+
+	m2 := make(map[string]int)
+	m2["pc"] = 5000
+	fmt.Println(m2)
+
+	//初期化されていないため、エラー
+	//var m3 map[string]int
+	//m3["pc"] = 5000
+	//fmt.Println(m3)
+
+	//初期化されていないため、nil
+	var s []int
+	if s == nil {
+		fmt.Println("Nil")
+	}
+}
+
 func makeTest() {
 	n := make([]int, 3, 5)
 	fmt.Printf("len=%d cap=%d value=%v\n", len(n), cap(n), n)
@@ -93,7 +159,7 @@ func makeTest() {
 	fmt.Printf("len=%d cap=%d value=%v\n", len(b), cap(b), b)
 	fmt.Printf("len=%d cap=%d value=%v\n", len(c), cap(c), c)
 
-	c = make([]int,0,5)
+	c = make([]int, 0, 5)
 	for i := 0; i < 5; i++ {
 		c = append(c, i)
 		fmt.Println(c)
